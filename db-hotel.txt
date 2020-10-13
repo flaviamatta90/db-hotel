@@ -12,9 +12,10 @@
 
 °Calcola il totale degli ordini accepted:
 -SELECT SUM(status = 'accepted') FROM `pagamenti`-;
+-SELECT COUNT(status) FROM `pagamenti` WHERE status = 'accepted'-;
 
 °Qual è il prezzo massimo pagato?:
---;
+-SELECT * FROM `pagamenti` WHERE price = 991.00-;
 
 °Seleziona gli ospiti riconosciuti con patente e nati nel 1975:
 -SELECT * FROM `ospiti` WHERE `document_type` = 'Driver License' AND `date_of_birth` = '1975'-;

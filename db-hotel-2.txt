@@ -10,7 +10,7 @@ SELECT SUM(price) FROM `pagamenti` GROUP BY `status`
 SELECT COUNT(stanza_id), stanza_id FROM `prenotazioni` GROUP BY stanza_id
 
 -Fai una analisi per vedere se ci sono ore in cui le prenotazioni sono più frequenti:
-
+SELECT COUNT `id` HOUR `created_at` FROM prenotazioni GROUP BY HOUR create_at
 
 -Quante prenotazioni ha fatto l’ospite che ha fatto più prenotazioni?:
 SELECT COUNT(prenotazione_id),ospite_id FROM `prenotazioni_has_ospiti` GROUP BY ospite_id
@@ -19,15 +19,28 @@ SELECT COUNT(prenotazione_id),ospite_id FROM `prenotazioni_has_ospiti` GROUP BY 
 
 Join:
 -Come si chiamano gli ospiti che hanno fatto più di due prenotazioni?:
+  
 
 -Stampare tutti gli ospiti per ogni prenotazione:
-SELECT * FROM `ospiti` LEFT JOIN `prenotazioni_has_ospiti` ON name = prenotazioni_has_ospiti.ospite_id
+
 
 -Stampare Nome, Cognome, Prezzo e Pagante per tutte le prenotazioni fatte a Maggio 2018:
+ 
 
 -Fai la somma di tutti i prezzi delle prenotazioni per le stanze del primo piano:
 
+
 -Prendi i dati di fatturazione per la prenotazione con id=7:
+SELECT paganti.name, paganti.lastname, paganti.address, pagamenti.price, prenotazioni.stanza_id 
+FROM `pagamenti` 
+INNER JOIN `paganti` 
+ON pagamenti.pagante_id = paganti.id 
+INNER JOIN `prenotazioni` 
+ON pagamenti.prenotazione_id = prenotazioni.id 
+WHERE pagamenti.prenotazione_id = 7
 
 -Le stanze sono state tutte prenotate almeno una volta? (Visualizzare le stanze non ancora prenotate):
-
+SELECT * FROM `stanze` 
+LEFT JOIN `prenotazioni` 
+ON stanze.id = prenotazioni.stanza_id 
+WHERE prenotazioni.stanza_id IS NULL
